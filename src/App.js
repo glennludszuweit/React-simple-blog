@@ -32,10 +32,18 @@ class App extends Component {
   };
   render() {
     return (
-      <div className='App'>
-        <Header />
-        <Posts posts={this.state.posts} />
-      </div>
+      <Router>
+        <div className='App'>
+          <Header />
+          <Switch>
+            <Route
+              exact
+              path='/'
+              render={() => <Posts posts={this.state.posts} />}
+            />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
