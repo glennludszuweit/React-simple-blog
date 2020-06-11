@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
+import PageNotFound from './components/PageNotFound';
 import Posts from './components/Posts';
 import Post from './components/Post';
 
@@ -48,9 +49,11 @@ class App extends Component {
                 const post = this.state.posts.find(
                   (post) => post.slug === props.match.params.postSlug
                 );
-                return <Post post={post} />;
+                if (post) return <Post post={post} />;
+                else return <PageNotFound />;
               }}
             />
+            <Route component={PageNotFound} />
           </Switch>
         </div>
       </Router>
