@@ -33,6 +33,17 @@ class App extends Component {
       },
     ],
   };
+
+  addNewPost = (post) => {
+    post.id = this.state.posts.length + 1;
+    post.slug = encodeURIComponent(
+      post.title.toLowerCase().split(' ').join('-')
+    );
+    this.setState({
+      posts: [...this.state.posts, post],
+    });
+  };
+
   render() {
     return (
       <Router>
@@ -54,7 +65,11 @@ class App extends Component {
                 else return <PageNotFound />;
               }}
             />
-            <Route exact path='/new' component={PostForm} />
+            <Route
+              exact
+              path='/new'
+              render={() => <PostForm addNewPost={this.addNewPost} />}
+            />
             <Route component={PageNotFound} />
           </Switch>
         </div>

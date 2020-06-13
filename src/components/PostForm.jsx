@@ -16,7 +16,7 @@ class PostForm extends Component {
         title: this.state.title,
         content: this.state.content,
       };
-      console.log(post);
+      this.props.addNewPost(post);
     } else {
       alert('Title Required');
     }
