@@ -7,6 +7,9 @@ const Header = (props) => (
       <li key='home'>
         <Link to='/'>Simple Blog</Link>
       </li>
+      <li key='new-post'>
+        <Link to='/new'>New Post</Link>
+      </li>
     </ul>
   </header>
 );

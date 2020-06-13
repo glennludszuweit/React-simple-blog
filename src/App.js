@@ -5,6 +5,7 @@ import Header from './components/Header';
 import PageNotFound from './components/PageNotFound';
 import Posts from './components/Posts';
 import Post from './components/Post';
+import PostForm from './components/PostForm';
 
 class App extends Component {
   state = {
@@ -53,6 +54,7 @@ class App extends Component {
                 else return <PageNotFound />;
               }}
             />
+            <Route exact path='/new' component={PostForm} />
             <Route component={PageNotFound} />
           </Switch>
         </div>
