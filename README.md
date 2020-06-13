@@ -12,3 +12,11 @@
     <li>Authentication with Firebase and third party accounts.</li>
     <li>CRUD livesync with Firebase Firestore.</li>
 </ul>
+
+<h2>Feel free to use this project</h2>
+<ul>
+    <li>Download zip or clone this repo.</li>
+    <li>Navigate to project directory.</li>
+    <li>"npm install" or "yarn add"</li>
+    <li>"npm start" or "yarn start"</li>
+</ul>
