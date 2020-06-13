@@ -7,6 +7,7 @@ class PostForm extends Component {
   state = {
     title: '',
     content: '',
+    saved: false,
   };
 
   handleAddNewPost = (e) => {
@@ -17,12 +18,16 @@ class PostForm extends Component {
         content: this.state.content,
       };
       this.props.addNewPost(post);
+      this.setState({ saved: true });
     } else {
       alert('Title Required');
     }
   };
 
   render() {
+    if (this.state.saved === true) {
+      return <Redirect to='/' />;
+    }
     return (
       <form onSubmit={this.handleAddNewPost} className='container'>
         <h1>Add new Post</h1>
