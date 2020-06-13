@@ -9,9 +9,22 @@ class PostForm extends Component {
     content: '',
   };
 
+  handleAddNewPost = (e) => {
+    e.preventDefault();
+    if (this.state.title) {
+      const post = {
+        title: this.state.title,
+        content: this.state.content,
+      };
+      console.log(post);
+    } else {
+      alert('Title Required');
+    }
+  };
+
   render() {
     return (
-      <form action='' className='container'>
+      <form onSubmit={this.handleAddNewPost} className='container'>
         <h1>Add new Post</h1>
         <p>
           <input
@@ -19,7 +32,7 @@ class PostForm extends Component {
             id='form-title'
             value={this.state.title}
             onChange={(e) => {
-              this.state({
+              this.setState({
                 title: e.target.value,
               });
             }}
@@ -27,8 +40,9 @@ class PostForm extends Component {
         </p>
         <p>
           <Quill
+            className='quill-height'
             onChange={(content, delta, source, editor) => {
-              this.state({
+              this.setState({
                 content: editor.getContents(),
               });
             }}

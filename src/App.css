@@ -128,3 +128,8 @@
 .App button.linkLike:hover {
   cursor: pointer;
 }
+
+.App .quill-height {
+  height: 300px;
+  margin: 0 0 60px 0;
+}
