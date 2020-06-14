@@ -21,7 +21,11 @@ class App extends Component {
     );
     this.setState({
       posts: [...this.state.posts, post],
+      message: 'saved',
     });
+    setTimeout(() => {
+      this.setState({ message: null });
+    }, 1500);
   };
 
   render() {
