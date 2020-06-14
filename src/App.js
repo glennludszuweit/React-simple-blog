@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import PageNotFound from './components/PageNotFound';
@@ -54,6 +59,19 @@ class App extends Component {
               exact
               path='/new'
               render={() => <PostForm addNewPost={this.addNewPost} />}
+            />
+            <Route
+              path='/edit/:postSlug'
+              render={(props) => {
+                const post = this.state.posts.find(
+                  (post) => post.slug === props.match.params.postSlug
+                );
+                if (post) {
+                  return <PostForm post={post} />;
+                } else {
+                  return <Redirect to='/' />;
+                }
+              }}
             />
             <Route component={PageNotFound} />
           </Switch>
