@@ -15,7 +15,14 @@ import Message from './components/Message';
 
 class App extends Component {
   state = {
-    posts: [],
+    posts: [
+      {
+        id: 1,
+        slug: 'sample-post',
+        title: 'Sample Post',
+        content: ' Sample Content',
+      },
+    ],
     message: null,
   };
 
