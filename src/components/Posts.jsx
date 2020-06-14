@@ -11,6 +11,9 @@ const Posts = ({ posts }) => (
           <h3>
             <Link to={`/post/${post.slug}`}>{post.title}</Link>
           </h3>
+          <p>
+            <Link to={`/edit/${post.slug}`}>Edit</Link>
+          </p>
         </li>
       ))}
     </ul>

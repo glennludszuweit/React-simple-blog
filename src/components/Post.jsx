@@ -1,5 +1,6 @@
 import React from 'react';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
+import { Link } from 'react-router-dom';
 
 const Post = ({ post }) => {
   const converter = new QuillDeltaToHtmlConverter(post.content.ops, {});
