@@ -19,14 +19,31 @@ class App extends Component {
     message: null,
   };
 
+  getNewSlugFromTitle = (title) =>
+    encodeURIComponent(title.toLowerCase().split(' ').join('-'));
+
   addNewPost = (post) => {
     post.id = this.state.posts.length + 1;
-    post.slug = encodeURIComponent(
-      post.title.toLowerCase().split(' ').join('-')
-    );
+    post.slug = this.getNewSlugFromTitle(post.title);
     this.setState({
       posts: [...this.state.posts, post],
       message: 'saved',
+    });
+    setTimeout(() => {
+      this.setState({ message: null });
+    }, 1500);
+  };
+
+  updatePost = (post) => {
+    post.slug = this.getNewSlugFromTitle(post.title);
+    const index = this.state.posts.findIndex((p) => p.id === post.id);
+    const posts = this.state.posts
+      .slice(0, index)
+      .concat(this.state.posts.slice(index + 1));
+    const newPosts = [...posts, post].sort((a, b) => a.id - b.id);
+    this.setState({
+      posts: newPosts,
+      message: 'updated',
     });
     setTimeout(() => {
       this.setState({ message: null });
@@ -67,7 +84,7 @@ class App extends Component {
                   (post) => post.slug === props.match.params.postSlug
                 );
                 if (post) {
-                  return <PostForm post={post} />;
+                  return <PostForm updatePost={this.updatePost} post={post} />;
                 } else {
                   return <Redirect to='/' />;
                 }
