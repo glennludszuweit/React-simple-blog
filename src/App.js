@@ -6,32 +6,12 @@ import PageNotFound from './components/PageNotFound';
 import Posts from './components/Posts';
 import Post from './components/Post';
 import PostForm from './components/PostForm';
+import Message from './components/Message';
 
 class App extends Component {
   state = {
-    posts: [
-      // {
-      //   id: 1,
-      //   slug: 'hello-react',
-      //   title: 'Hello React',
-      //   content:
-      //     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, rem officia! Nemo nobis id cupiditate.',
-      // },
-      // {
-      //   id: 2,
-      //   slug: 'hello-simple-blog',
-      //   title: 'Hello Simple Blog',
-      //   content:
-      //     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, rem officia! Nemo nobis id cupiditate.',
-      // },
-      // {
-      //   id: 3,
-      //   slug: 'hello-admin',
-      //   title: 'Hello Admin',
-      //   content:
-      //     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, rem officia! Nemo nobis id cupiditate.',
-      // },
-    ],
+    posts: [],
+    message: null,
   };
 
   addNewPost = (post) => {
@@ -49,6 +29,7 @@ class App extends Component {
       <Router>
         <div className='App'>
           <Header />
+          {this.state.message && <Message type={this.state.message} />}
           <Switch>
             <Route
               exact
