@@ -75,7 +75,17 @@ class App extends Component {
             <Route
               exact
               path='/new'
-              render={() => <PostForm addNewPost={this.addNewPost} />}
+              render={() => (
+                <PostForm
+                  addNewPost={this.addNewPost}
+                  post={{
+                    id: 0,
+                    slug: '',
+                    title: '',
+                    content: '',
+                  }}
+                />
+              )}
             />
             <Route
               path='/edit/:postSlug'
