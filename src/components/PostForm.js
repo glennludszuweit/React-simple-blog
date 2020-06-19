@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import Quill from "react-quill";
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import Quill from 'react-quill';
 
 class PostForm extends Component {
   state = {
@@ -8,9 +8,9 @@ class PostForm extends Component {
       id: this.props.post.id,
       slug: this.props.post.slug,
       title: this.props.post.title,
-      content: this.props.post.content
+      content: this.props.post.content,
     },
-    saved: false
+    saved: false,
   };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.post.id !== this.props.post.id) {
@@ -19,12 +19,12 @@ class PostForm extends Component {
           id: this.props.post.id,
           slug: this.props.post.slug,
           title: this.props.post.title,
-          content: this.props.post.content
-        }
+          content: this.props.post.content,
+        },
       });
     }
   }
-  handlePostForm = e => {
+  handlePostForm = (e) => {
     e.preventDefault();
     if (this.state.post.title) {
       if (this.props.updatePost) {
@@ -34,35 +34,35 @@ class PostForm extends Component {
       }
       this.setState({ saved: true });
     } else {
-      alert("Title required");
+      alert('Title required');
     }
   };
   render() {
     if (this.state.saved === true) {
-      return <Redirect to="/" />;
+      return <Redirect to='/' />;
     }
     return (
-      <form className="container" onSubmit={this.handlePostForm}>
+      <form className='container' onSubmit={this.handlePostForm}>
         <h1>Add a New Post</h1>
         <p>
-          <label htmlFor="form-title">Title:</label>
+          <label htmlFor='form-title'>Title:</label>
           <br />
           <input
             defaultValue={this.props.title}
-            id="form-title"
+            id='form-title'
             value={this.state.post.title}
-            onChange={e =>
+            onChange={(e) =>
               this.setState({
                 post: {
                   ...this.state.post,
-                  title: e.target.value
-                }
+                  title: e.target.value,
+                },
               })
             }
           />
         </p>
         <p>
-          <label htmlFor="form-content">Content:</label>
+          <label htmlFor='form-content'>Content:</label>
         </p>
         <Quill
           defaultValue={this.state.post.content}
@@ -70,13 +70,13 @@ class PostForm extends Component {
             this.setState({
               post: {
                 ...this.state.post,
-                content: editor.getContents()
-              }
+                content: editor.getContents(),
+              },
             });
           }}
         />
         <p>
-          <button type="submit">Save</button>
+          <button type='submit'>Save</button>
         </p>
       </form>
     );
