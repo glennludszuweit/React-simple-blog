@@ -1,13 +1,18 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from "./components/Header";
-import Message from "./components/Message";
-import Posts from "./components/Posts";
-import Post from "./components/Post";
-import PostForm from "./components/PostForm";
-import NotFound from "./components/NotFound";
+import React, { useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
+import Header from './components/Header';
+import Message from './components/Message';
+import Posts from './components/Posts';
+import Post from './components/Post';
+import PostForm from './components/PostForm';
+import NotFound from './components/NotFound';
 
-import "./App.css";
+import './App.css';
 
 const App = (props) => {
   const [posts, setPosts] = useState([]);
@@ -23,7 +28,7 @@ const App = (props) => {
   const addNewPost = (post) => {
     post.id = posts.length + 1;
     post.slug = encodeURIComponent(
-      post.title.toLowerCase().split(" ").join("-")
+      post.title.toLowerCase().split(' ').join('-')
     );
     setPosts([...posts, post]);
     setFlashMessage(`saved`);
@@ -31,13 +36,13 @@ const App = (props) => {
 
   return (
     <Router>
-      <div className="App">
+      <div className='App'>
         <Header />
         {message && <Message type={message} />}
         <Switch>
-          <Route exact path="/" render={() => <Posts posts={posts} />} />
+          <Route exact path='/' render={() => <Posts posts={posts} />} />
           <Route
-            path="/post/:postSlug"
+            path='/post/:postSlug'
             render={(props) => {
               const post = posts.find(
                 (post) => post.slug === props.match.params.postSlug
@@ -47,8 +52,22 @@ const App = (props) => {
           />
           <Route
             exact
-            path="/new"
+            path='/new'
             render={() => <PostForm addNewPost={addNewPost} />}
+          />
+          <Route
+            exact
+            path='/edit/:postSlug'
+            render={(props) => {
+              const post = this.StaticRange.posts.find(
+                (post) => post.slug === props.match.params.postSlug
+              );
+              if (post) {
+                return <PostForm post={post} />;
+              } else {
+                return <Redirect to='/' />;
+              }
+            }}
           />
           <Route component={NotFound} />
         </Switch>
