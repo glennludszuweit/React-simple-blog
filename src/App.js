@@ -63,7 +63,17 @@ const App = (props) => {
           <Route
             exact
             path='/new'
-            render={() => <PostForm addNewPost={addNewPost} />}
+            render={() => (
+              <PostForm
+                addNewPost={addNewPost}
+                post={{
+                  id: 0,
+                  slug: '',
+                  title: '',
+                  content: '',
+                }}
+              />
+            )}
           />
           <Route
             path='/edit/:postSlug'
