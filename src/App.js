@@ -12,6 +12,7 @@ import Posts from './components/Posts';
 import Post from './components/Post';
 import PostForm from './components/PostForm';
 import NotFound from './components/NotFound';
+import Login from './components/Login';
 
 import './App.css';
 
@@ -22,7 +23,12 @@ class App extends Component {
   };
 
   getNewSlugFromTitle = (title) =>
-    encodeURIComponent(title.toLowerCase().split(' ').join('-'));
+    encodeURIComponent(
+      title
+        .toLowerCase()
+        .split(' ')
+        .join('-')
+    );
 
   addNewPost = (post) => {
     post.id = this.state.posts.length + 1;
@@ -93,6 +99,7 @@ class App extends Component {
                 }
               }}
             />
+            <Route exact path='/login' component={Login} />
             <Route
               exact
               path='/new'
