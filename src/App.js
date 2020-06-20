@@ -88,7 +88,7 @@ class App extends Component {
       <Router>
         <div className='App'>
           <SimpleStorage parent={this} />
-          <Header />
+          <Header isAuthenticated={this.state.isAuthenticated} />
           {this.state.message && <Message type={this.state.message} />}
           <Switch>
             <Route

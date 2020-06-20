@@ -7,12 +7,15 @@ const Header = (props) => (
       <li>
         <Link to='/'>Simple Blog</Link>
       </li>
-      <li>
-        <Link to='/new'>New Post</Link>
-      </li>
-      <li>
-        <Link to='/login'>Login</Link>
-      </li>
+      {props.isAuthenticated ? (
+        <li>
+          <Link to='/new'>New Post</Link>
+        </li>
+      ) : (
+        <li>
+          <Link to='/login'>Login</Link>
+        </li>
+      )}
     </ul>
   </header>
 );
