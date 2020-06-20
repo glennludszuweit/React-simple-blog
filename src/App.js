@@ -95,7 +95,11 @@ class App extends Component {
               exact
               path='/'
               render={() => (
-                <Posts posts={this.state.posts} deletePost={this.deletePost} />
+                <Posts
+                  isAuthenticated={this.state.isAuthenticated}
+                  posts={this.state.posts}
+                  deletePost={this.deletePost}
+                />
               )}
             />
             <Route

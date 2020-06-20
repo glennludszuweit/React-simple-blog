@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Header = (props) => (
+const Header = ({ isAuthenticated }) => (
   <header className='App-header'>
     <ul className='container'>
       <li>
         <Link to='/'>Simple Blog</Link>
       </li>
-      {props.isAuthenticated ? (
+      {isAuthenticated ? (
         <li>
           <Link to='/new'>New Post</Link>
         </li>
