@@ -83,12 +83,25 @@ class App extends Component {
       .catch((error) => console.error(error));
   };
 
+  onLogout = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        this.setState({ isAuthenticated: false });
+      })
+      .catch((error) => console.error(error));
+  };
+
   render() {
     return (
       <Router>
         <div className='App'>
           <SimpleStorage parent={this} />
-          <Header isAuthenticated={this.state.isAuthenticated} />
+          <Header
+            isAuthenticated={this.state.isAuthenticated}
+            onLogout={this.onLogout}
+          />
           {this.state.message && <Message type={this.state.message} />}
           <Switch>
             <Route
