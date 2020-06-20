@@ -19,6 +19,7 @@ import './App.css';
 
 class App extends Component {
   state = {
+    isAuthenticated: false,
     posts: [],
     message: null,
   };
@@ -76,7 +77,9 @@ class App extends Component {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then((user) => console.log('Logged in!'))
+      .then((user) => {
+        this.setState({ isAuthenticated: true });
+      })
       .catch((error) => console.error(error));
   };
 
