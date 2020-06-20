@@ -8,7 +8,7 @@ class Login extends Component {
 
   handleLogin = (e) => {
     e.preventDefault();
-    console.log(this.state.email, this.state.password);
+    this.props.onLogin(this.state.email, this.state.password);
   };
 
   render() {

@@ -5,6 +5,7 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+import firebase from './firebase';
 import SimpleStorage from 'react-simple-storage';
 import Header from './components/Header';
 import Message from './components/Message';
@@ -71,6 +72,14 @@ class App extends Component {
     }
   };
 
+  onLogin = (email, password) => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((user) => console.log('Logged in!'))
+      .catch((error) => console.error(error));
+  };
+
   render() {
     return (
       <Router>
@@ -99,7 +108,11 @@ class App extends Component {
                 }
               }}
             />
-            <Route exact path='/login' component={Login} />
+            <Route
+              exact
+              path='/login'
+              render={() => <Login onLogin={this.onLogin} />}
+            />
             <Route
               exact
               path='/new'
