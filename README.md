@@ -4,7 +4,7 @@
 
 note!:
   The login form is disabled by default!
-  You only need to login to test the app!
+  You only need click/tap login button to test the app!
   Enjoy!
   
 ## Installation
