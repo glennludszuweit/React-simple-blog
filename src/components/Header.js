@@ -5,7 +5,7 @@ const Header = ({ isAuthenticated, onLogout }) => (
   <header className='App-header'>
     <ul className='container'>
       <li>
-        <Link to='/'>Simple Blog</Link>
+        <Link to='/'>SimpleBlog</Link>
       </li>
       {isAuthenticated ? (
         <React.Fragment>
