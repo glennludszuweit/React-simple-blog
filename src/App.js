@@ -33,10 +33,11 @@ class App extends Component {
     );
 
   addNewPost = (post) => {
-    post.id = this.state.posts.length + 1;
+    const postsRef = firebase.database().ref('posts');
     post.slug = this.getNewSlugFromTitle(post.title);
+    delete post.key;
+    postsRef.push(post);
     this.setState({
-      posts: [...this.state.posts, post],
       message: 'saved',
     });
     setTimeout(() => {
@@ -146,7 +147,7 @@ class App extends Component {
                 this.state.isAuthenticated ? (
                   <PostForm
                     addNewPost={this.addNewPost}
-                    post={{ id: 0, slug: '', title: '', content: '' }}
+                    post={{ key: null, slug: '', title: '', content: '' }}
                   />
                 ) : (
                   <Redirect to='/login' />
