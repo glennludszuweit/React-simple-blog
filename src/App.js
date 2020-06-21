@@ -24,6 +24,26 @@ class App extends Component {
     message: null,
   };
 
+  onLogin = (email, password) => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        this.setState({ isAuthenticated: true });
+      })
+      .catch((error) => console.error(error));
+  };
+
+  onLogout = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        this.setState({ isAuthenticated: false });
+      })
+      .catch((error) => console.error(error));
+  };
+
   getNewSlugFromTitle = (title) =>
     encodeURIComponent(
       title
@@ -74,25 +94,24 @@ class App extends Component {
     }
   };
 
-  onLogin = (email, password) => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.setState({ isAuthenticated: true });
-      })
-      .catch((error) => console.error(error));
-  };
-
-  onLogout = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        this.setState({ isAuthenticated: false });
-      })
-      .catch((error) => console.error(error));
-  };
+  componentDidMount() {
+    const postsRef = firebase.database().ref('posts');
+    postsRef.on('value', (snapshot) => {
+      const posts = snapshot.val();
+      const newStatePosts = [];
+      for (let post in posts) {
+        newStatePosts.push({
+          key: post,
+          slug: posts[post].slug,
+          title: posts[post].title,
+          content: posts[post].content,
+        });
+      }
+      this.setState({
+        posts: newStatePosts,
+      });
+    });
+  }
 
   render() {
     return (
