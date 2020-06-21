@@ -82,9 +82,9 @@ class App extends Component {
 
   deletePost = (post) => {
     if (window.confirm('Delete this post?')) {
-      const posts = this.state.posts.filter((p) => p.id !== post.id);
+      const postRef = firebase.database().ref('posts/' + post.key);
+      postRef.remove();
       this.setState({
-        posts,
         message: 'deleted',
       });
       setTimeout(() => {
